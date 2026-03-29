@@ -28,15 +28,11 @@ def main():
         ).ask()
 
     # 2. Select Time
-    use_now = questionary.confirm("Use current time?", default=True).ask()
-    if use_now:
-        selected_time = datetime.now().strftime("%H:%M:%S")
-    else:
-        selected_time = questionary.text(
-            "Enter time (HH:MM:SS):",
-            default=datetime.now().strftime("%H:%M:%S"),
-            validate=lambda val: True if len(val) == 8 and ":" in val else "Format must be HH:MM:SS"
-        ).ask()
+    selected_time = questionary.text(
+        "Enter time (HH:MM:SS):",
+        placeholder="e.g., 10:30:00",
+        validate=lambda val: True if len(val) == 8 and val.count(":") == 2 else "Format must be HH:MM:SS"
+    ).ask()
 
     # 3. Select Timezone
     common_timezones = [
