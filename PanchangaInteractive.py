@@ -39,7 +39,16 @@ def main():
         ).ask()
 
     # 3. Select Timezone
-    common_timezones = ["US/Central", "Asia/Kolkata", "US/Eastern", "US/Pacific", "UTC"]
+    common_timezones = [
+        "US/Central",
+        "Asia/Kolkata",
+        "US/Eastern",
+        "US/Pacific",
+        "Europe/London",
+        "Asia/Singapore",
+        "Asia/Dubai",
+        "UTC"
+    ]
     selected_timezone = questionary.select(
         "Select Timezone:",
         choices=common_timezones + ["Other (Type name)"]

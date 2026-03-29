@@ -22,9 +22,31 @@ st.markdown("Calculate the five limbs of the Hindu calendar (Tithi, Vara, Naksha
 # Sidebar for inputs
 st.sidebar.header("Configuration")
 
+# Timezone Selection
+common_timezones = [
+    "US/Central",
+    "Asia/Kolkata",
+    "US/Eastern",
+    "US/Mountain",
+    "US/Pacific",
+    "UTC",
+    "Europe/London",
+    "Asia/Singapore",
+    "Asia/Dubai",
+    "Australia/Sydney"
+]
+
+# Merge common with all, ensuring US/Central is first
+all_tzs = sorted(list(set(pytz.all_timezones) - set(common_timezones)))
+tz_options = common_timezones + all_tzs
+
 selected_date = st.sidebar.date_input("Select Date", date.today())
 selected_time = st.sidebar.time_input("Select Time", datetime.now().time())
-selected_timezone = st.sidebar.selectbox("Select Timezone", pytz.all_timezones, index=pytz.all_timezones.index("US/Central") if "US/Central" in pytz.all_timezones else 0)
+selected_timezone = st.sidebar.selectbox(
+    "Select Timezone", 
+    tz_options, 
+    index=0  # US/Central is now at index 0
+)
 
 def get_karana_name(k0):
     # k0 is 0-59 index
