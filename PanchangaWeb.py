@@ -41,7 +41,8 @@ all_tzs = sorted(list(set(pytz.all_timezones) - set(common_timezones)))
 tz_options = common_timezones + all_tzs
 
 selected_date = st.sidebar.date_input("Select Date", date.today())
-selected_time = st.sidebar.time_input("Select Time", datetime.now().time())
+# Using a static default or no dynamic now() to prevent the reset bug
+selected_time = st.sidebar.time_input("Select Time", value=None)
 selected_timezone = st.sidebar.selectbox(
     "Select Timezone", 
     tz_options, 
